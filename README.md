@@ -1,2 +1,2 @@
-# cs61a
-
+# CS61a UCB
+For lab and project
