@@ -1,2 +1,2 @@
 # CS61a UCB
-For lab and project
+For self-learning
