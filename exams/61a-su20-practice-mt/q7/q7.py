@@ -19,8 +19,8 @@ def longest_seq( tr ):
         n = 1
         if not t.is_leaf():
             for branch in t.branches:
-                lenth = longest(branch)
-                if branch.label = t.label + 1:
+                length = longest(branch)
+                if branch.label == t.label + 1:
                     n = max(length+1, n)
             max_len = max(n, max_len)
         return n
