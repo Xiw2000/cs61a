@@ -17,12 +17,8 @@ def same_digits(a, b):
     False
     """
     assert a > 0 and b > 0
-    # consecutively
-    # a and b are the same
-
-
     while a and b:
-        if a % 10 == b % 10:
+        if  a % 10 == b % 10:
             end = a % 10
             while a % 10 == end:
                 a = a // 10
@@ -53,12 +49,12 @@ def same_digits(a, b):
 #     """
 #     assert a > 0 and b > 0
 #     while a and b:
-#         if ______:
+#         if  a % 10 == b % 10:
 #             end = a % 10
-#             while ______:
+#             while a % 10 == end:
 #                 a = a // 10
-#             while ______:
+#             while b % 10 == end:
 #                 b = b // 10
 #         else:
-#             ______
-#     ______
+#             return False
+#     return a == b

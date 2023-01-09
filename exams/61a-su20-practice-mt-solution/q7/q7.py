@@ -17,12 +17,12 @@ def longest_seq( tr ):
         if greater. """
         nonlocal max_len
         n = 1
-        if not t.is_leaf():
-            for branch in t.branches:
-                lenth = longest(branch)
-                if branch.label = t.label + 1:
-                    n = max(length+1, n)
-            max_len = max(n, max_len)
+        if not t . is_leaf ():
+            for b in t . branches:
+                L = longest(b)
+                if b. label == t. label + 1:
+                    n = max (n , L + 1)
+            max_len = max (n , max_len)
         return n
     longest(tr)
     return max_len
@@ -56,14 +56,14 @@ class Tree:
 #         """ Returns longest downward sequence of nodes starting at T whose
 #         labels are consecutive integers. Updates max_len to that length ,
 #         if greater. """
-#         ______
+#         nonlocal max_len
 #         n = 1
-#         if ______:
-#             for ______ in ______:
-#                 ______
-#                 if ______:
-#                     n = ______
-#             max_len = ______
+#         if not t . is_leaf ():
+#             for b in t . branches:
+#                 L = longest(b)
+#                 if b. label == t. label + 1:
+#                     n = max (n , L + 1)
+#             max_len = max (n , max_len)
 #         return n
 #     longest(tr)
 #     return max_len
