@@ -38,19 +38,20 @@ def schedule(galaxy, sum_to, max_digit):
     ['0200111', '0201110', '0210110', '1200110']
     """
     def schedule_helper(galaxy, sum_sofar, index):
-        if ______ and ______:
+        if index >= len(galaxy) and sum_sofar == sum_to:
             return [galaxy]
-        elif ______:
+        elif index >= len(galaxy) or sum_sofar > sum_to:
             return []
-        elif ______:
-            return ______
-        ans = []
-        for x in ______:
-            modified_galaxy = ______
-            ______
-        return ans
+        elif galaxy[index] != '?':
+            return schedule_helper(galaxy, sum_sofar+int(galaxy[index]), index+1)
+        else:
+            ans = []
+            for x in range(0, max_digit+1):
+                modified_galaxy = galaxy[:index] + str(x) + galaxy[(index+1):]
+                ans += schedule_helper(modified_galaxy, sum_sofar+x, index+1)
+            return ans
 
-    return ______
+    return schedule_helper(galaxy, 0, 0)
 
 # ORIGINAL SKELETON FOLLOWS
 

@@ -29,15 +29,26 @@ def copycat(lst1, lst2):
     >>> copycat(['a', 'b', 'c'], [1, -1, 3])
     ['c', 'c', 'c']
     """
-    def copycat_helper(______, ______, ______):
-        if ______:
-            return ______
-        if ______:
-            ______ = ______
+    ans = []
+    for i in range(min(len(lst1), len(lst2))):
+        for j in range(abs(lst2[i])):
+            ans.append(lst1[i]) if lst2[i] > 0 else ans.pop(lst1[i])
+    return ans
+       
+       
+def copycat(lst1, lst2):   
+    def copycat_helper(lst1, lst2, ans)
+        if len(lst1) == 0 or len(lst2) == 0:
+            return ans
+        if lst2[0] >= 0:
+            ans = ans + [lst1[0] for i in range(lst2[0])]
         else:
-            ______ = ______[:______]
-        return ______
-    return ______
+            ans = ans[:lst2[0]]
+            return copycat_helper(lst1[1:], lst2[1:], ans)
+    return copycat_helper(lst1, lst2, [])
+
+
+
 
 # ORIGINAL SKELETON FOLLOWS
 
@@ -70,12 +81,14 @@ def copycat(lst1, lst2):
 #     >>> copycat(['a', 'b', 'c'], [1, -1, 3])
 #     ['c', 'c', 'c']
 #     """
-#     def copycat_helper(______, ______, ______):
-#         if ______:
-#             return ______
-#         if ______:
-#             ______ = ______
-#         else:
-#             ______ = ______[:______]
-#         return ______
-#     return ______
+#      def copycat_helper(lst1, lst2, ans):
+'''
+       if len(lst1) == 0 or len(lst2) == 0:
+            return ans
+        if lst2[0] >= 0:
+            ans = ans + [lst1[0] for i in range(lst2[0])]
+        else:
+            ans = ans[:lst2[0]]
+        return copycat_helper(lst1[1:], lst2[1:], ans)
+    return copycat_helper(lst1, lst2, [])
+'''
