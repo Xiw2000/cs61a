@@ -8,6 +8,9 @@ def convert_link(link):
     []
     """
     "*** YOUR CODE HERE ***"
+    if not link:
+        return []
+    return [link.first] + convert_link(link.rest)
 
 
 def every_other(s):
@@ -28,7 +31,29 @@ def every_other(s):
     Link(4)
     """
     "*** YOUR CODE HERE ***"
+    if s is Link.empty or s.rest is Link.empty:
+        return
+    s.rest = s.rest.rest
+    return every_other(s.rest)
 
+class Tree:
+    """
+    >>> t = Tree(3, [Tree(2, [Tree(5)]), Tree(4)])
+    >>> t.label
+    3
+    >>> t.branches[0].label
+    2
+    >>> t.branches[1].is_leaf()
+    True
+    """
+    def __init__(self, label, branches=[]):
+        for b in branches:
+            assert isinstance(b, Tree)
+        self.label = label
+        self.branches = list(branches)
+
+    def is_leaf(self):
+        return not self.branches
 
 def label_squarer(t):
     """Mutates a Tree t by squaring all its elements.
@@ -39,6 +64,11 @@ def label_squarer(t):
     Tree(1, [Tree(9, [Tree(25)]), Tree(49)])
     """
     "*** YOUR CODE HERE ***"
+    t.label = t.label ** 2  
+    if t.is_leaf():
+        return
+    for b in t.branches:
+        label_squarer(b)
 
 
 def cumulative_mul(t):
@@ -49,9 +79,21 @@ def cumulative_mul(t):
     >>> cumulative_mul(t)
     >>> t
     Tree(105, [Tree(15, [Tree(5)]), Tree(7)])
+    >>> m = Tree(1)
+    >>> cumulative_mul(m)
+    >>> m
+    Tree(1)
     """
     "*** YOUR CODE HERE ***"
-
+    if t.is_leaf():
+        return 
+    for b in t.branches:
+        cumulative_mul(b)
+    
+    ans = t.label
+    for b in t.branches:
+        ans = ans * b.label
+    t.label = ans
 
 def has_cycle(link):
     """Return whether link contains a cycle.
@@ -68,6 +110,14 @@ def has_cycle(link):
     False
     """
     "*** YOUR CODE HERE ***"
+    link_set = set()
+    while link != Link.empty:
+        if link in link_set:
+            return True
+        else:
+            link_set.add(link)
+        link = link.rest        
+    return False
 
 def has_cycle_constant(link):
     """Return whether link contains a cycle.
@@ -81,6 +131,16 @@ def has_cycle_constant(link):
     False
     """
     "*** YOUR CODE HERE ***"
+    p_slow, p_fast = link, link
+    while p_fast != Link.empty:
+        p_slow = p_slow.rest
+        if p_fast.rest != Link.empty:
+            p_fast = p_fast.rest.rest
+            if p_slow == p_fast:
+                return True
+        else:
+            break
+    return False
 
 
 def reverse_other(t):
@@ -97,6 +157,15 @@ def reverse_other(t):
     Tree(1, [Tree(8, [Tree(3, [Tree(5), Tree(4)]), Tree(6, [Tree(7)])]), Tree(2)])
     """
     "*** YOUR CODE HERE ***"
+    if t.is_leaf():
+        return
+    label_list = []
+    for b in t.branches:
+        label_list.append(b.label)
+    for b, new_label in zip(t.branches,label_list[::-1]):
+        b.label =new_label
+        for bran_bran in b.branches:
+            reverse_other(bran_bran)
 
 
 class Link:
